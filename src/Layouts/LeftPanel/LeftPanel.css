@@ -1,5 +1,17 @@
 .left-panel {
+   font-family: Arial, Helvetica, sans-serif;
+   font-size: 18px;
+   padding: 30px 20px;
    width: 400px;
    display: flex;
    flex-direction: column;
+}
+
+@media (max-width: 1000px) {
+   .left-panel {
+      font-size: 14px;
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 50px;
+   }
 }

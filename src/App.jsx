@@ -5,8 +5,9 @@ import LeftPanel from './Layouts/LeftPanel/LeftPanel';
 import Body from './Layouts/Body/Body';
 import JournalForm from './components/JournalForm/JournalForm';
 import { useState } from 'react';
+import { useEffect } from 'react';
 
-const data = [
+// const data = [
   // {
   //   title: 'Подготовка к обновлению курсов',
   //   text: 'Сегодня провёл весь день за...',
@@ -25,10 +26,27 @@ const data = [
   //   date: new Date(),
   //   id: 3,
   // },
-];
+// ];
 
 function App() {
-  const [items, setItems] = useState(data);
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem('data'));
+    if(data) {
+      setItems(data.map(item => ({
+        ...item,
+        date: new Date(item.date)
+      })))
+    }
+  }, [])
+
+  useEffect(() => {
+    if(items.length) {
+      console.log('Запись');
+      localStorage.setItem('data', JSON.stringify(items))
+    }
+  }, [items])
 
   const addItems = (item) => {
     setItems((oldItems) => [
